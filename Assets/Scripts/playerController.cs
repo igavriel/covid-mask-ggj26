@@ -6,15 +6,18 @@ public class playerController : MonoBehaviour
     [SerializeField] float dmgTime = 100;
     [SerializeField] int maskTimer = 5;
     [SerializeField] FloatSO maskSO;
+    [SerializeField] FloatSO health;
+    [SerializeField] IntSO collectables;
     [SerializeField] canvasController canvasController;
+
     Rigidbody2D rb2d;
     bool isMaskOn = false;
 
-    [SerializeField] FloatSO health; 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         health.Value = 100;
+        collectables.Value = 0;
         rb2d = GetComponent<Rigidbody2D>();
     }
 
@@ -31,6 +34,12 @@ public class playerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        // if (collision.CompareTag("Collectable"))
+        // {
+        //     Destroy(collision.gameObject);
+        //     collectables.Value++;
+        // }
+
         if (collision.CompareTag("Mask"))
         {
             Destroy(collision.gameObject);
