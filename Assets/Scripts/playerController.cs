@@ -23,7 +23,10 @@ public class playerController : MonoBehaviour
     {
         rb2d.linearVelocity = new Vector2(Input.GetAxis("Horizontal") * speed * Time.deltaTime, Input.GetAxis("Vertical") * speed * Time.deltaTime);
         if (!isMaskOn) health.Value -= dmgTime * Time.deltaTime;
-        if (maskSO.Value >= 0) maskSO.Value -= Time.deltaTime;
+        if (maskSO.Value >= 0)
+            maskSO.Value -= Time.deltaTime;
+        else
+            removeMask();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -33,7 +36,6 @@ public class playerController : MonoBehaviour
             Destroy(collision.gameObject);
             isMaskOn = true;
             maskSO.Value = maskTimer;
-            Invoke("removeMask", maskTimer);
 
         }
 
