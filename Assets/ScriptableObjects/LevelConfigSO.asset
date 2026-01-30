@@ -12,4 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 402f183fc5b724bcbbf6bc4392b35cd5, type: 3}
   m_Name: LevelConfigSO
   m_EditorClassIdentifier: Assembly-CSharp::LevelConfigSO
-  levels: []
+  levels:
+  - levelNumber: 1
+    timeSec: 20
+    collectable: 3
+    damage: 80
+  - levelNumber: 2
+    timeSec: 20
+    collectable: 4
+    damage: 80
