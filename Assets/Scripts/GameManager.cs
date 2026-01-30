@@ -109,10 +109,4 @@ public class GameManager : MonoBehaviour
     {
         isLevelActive = true;
     }
-
-    public void addCollectable()
-    {
-        collectables.Value++;
-    }
-
 }
