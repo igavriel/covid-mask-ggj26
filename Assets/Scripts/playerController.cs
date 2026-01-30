@@ -6,6 +6,7 @@ public class playerController : MonoBehaviour
     [SerializeField] float dmgTime = 100;
     [SerializeField] int maskTimer = 5;
     [SerializeField] FloatSO maskSO;
+    [SerializeField] canvasController canvasController;
     Rigidbody2D rb2d;
     bool isMaskOn = false;
 
@@ -34,6 +35,19 @@ public class playerController : MonoBehaviour
             maskSO.Value = maskTimer;
             Invoke("removeMask", maskTimer);
 
+        }
+
+        if (collision.CompareTag("Enemy"))
+        {
+            canvasController.dmgStart();
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Enemy"))
+        {
+            canvasController.dmgStop();
         }
     }
 
