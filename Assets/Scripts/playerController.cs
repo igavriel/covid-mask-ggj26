@@ -47,6 +47,8 @@ public class playerController : MonoBehaviour
 
             if (maskSO.Value <= 0f)
                 removeMask();
+
+        handleAnim();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
