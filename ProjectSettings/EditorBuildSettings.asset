@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Level 1.unity
     guid: a0d76a98e87aab04b8fd029cffe3ab36
   - enabled: 0
-    path: Assets/Scenes/Jonathan 2.unity
+    path: Assets/Scenes/Tests/Jonathan 2.unity
     guid: 9b07617650d23474989fb3f4d0b878ec
   - enabled: 0
     path: Assets/Scenes/Credits.unity
