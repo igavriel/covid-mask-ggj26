@@ -11,4 +11,5 @@ public enum SoundId
     DamagePlayer,
     Collectable,
     DeadPlayer,
+    ButtonClick,
 }
