@@ -24,11 +24,14 @@ public class playerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        float vertical = Input.GetAxis("Vertical");
         float horizontal = Input.GetAxis("Horizontal");
 
-        if (SystemInfo.operatingSystem.Contains("Mac")) horizontal *= -1;
+        if (SystemInfo.operatingSystem.Contains("Mac")) vertical *= -1;
 
-        rb2d.linearVelocity = new Vector2(Input.GetAxis("Horizontal") * speed * Time.deltaTime, Input.GetAxis("Vertical") * speed * Time.deltaTime);
+        rb2d.linearVelocity = new Vector2(
+            horizontal * speed * Time.deltaTime,
+            vertical * speed * Time.deltaTime);
         if (!isMaskOn) health.Value -= dmgTime * Time.deltaTime;
         if (maskSO.Value >= 0)
             maskSO.Value -= Time.deltaTime;
