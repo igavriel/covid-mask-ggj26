@@ -39,12 +39,7 @@ public class GameManager : MonoBehaviour
         collectables.Value = 0;
         initialHealth = health.Value;
         isLevelActive = true;
-
-        // Start random sound generator
-        if (randomSoundGenerator != null)
-        {
-            randomSoundGenerator.StartPlaying();
-        }
+        randomSoundGenerator.StartPlaying();
     }
 
     public void startLevel(int levelNumber)
@@ -56,13 +51,7 @@ public class GameManager : MonoBehaviour
     public void endLevel()
     {
         isLevelActive = false;
-
-        // Stop random sound generator
-        if (randomSoundGenerator != null)
-        {
-            randomSoundGenerator.StopPlaying();
-        }
-
+        randomSoundGenerator.StopPlaying();
         CalculateLevelCompletion();
     }
 
@@ -120,22 +109,12 @@ public class GameManager : MonoBehaviour
     public void pauseLevel()
     {
         isLevelActive = false;
-
-        // Pause random sound generator
-        if (randomSoundGenerator != null)
-        {
-            randomSoundGenerator.StopPlaying();
-        }
+        randomSoundGenerator.StopPlaying();
     }
 
     public void resumeLevel()
     {
         isLevelActive = true;
-
-        // Resume random sound generator
-        if (randomSoundGenerator != null)
-        {
-            randomSoundGenerator.StartPlaying();
-        }
+        randomSoundGenerator.StartPlaying();
     }
 }

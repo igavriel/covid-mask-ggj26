@@ -12,6 +12,7 @@ public class playerController : MonoBehaviour
     [SerializeField] canvasController canvasController;
     [SerializeField] MusicManager musicManager;
     [SerializeField] SoundManager soundManager;
+    [SerializeField] GameManager gameManager;
 
     Animator animatorController;
 
@@ -22,20 +23,23 @@ public class playerController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        health.Value = 100;
-        collectables.Value = 0;
         rb2d = GetComponent<Rigidbody2D>();
         animatorController = GetComponent<Animator>();
 
-        // לוודא מצב התחלה הגיוני
+        health.Value = 100;
+        collectables.Value = 0;
         isMaskOn = false;
         maskSO.Value = 0f;
+        gameManager.startLevel();
     }
 
     void Update()
     {
         if (health.Value < 0)
+        {
             Debug.Log("GameOver");
+            gameManager.endLevel();
+        }
         float vertical = Input.GetAxis("Vertical");
         float horizontal = Input.GetAxis("Horizontal");
 
@@ -48,7 +52,7 @@ public class playerController : MonoBehaviour
         if (maskSO.Value >= 0)
             maskSO.Value -= Time.deltaTime;
 
-            if (maskSO.Value <= 0f)
+            if (maskSO.Value <= 0f && isMaskOn)
                 removeMask();
 
         handleAnim();
@@ -58,8 +62,9 @@ public class playerController : MonoBehaviour
     {
         if (collision.CompareTag("Collectable"))
         {
-             Destroy(collision.gameObject);
-             collectables.Value++;
+            soundManager.Play(SoundId.Collectable);
+            Destroy(collision.gameObject);
+            collectables.Value++;
         }
 
         if (collision.CompareTag("Mask"))
@@ -75,7 +80,7 @@ public class playerController : MonoBehaviour
     {
         if (collision.CompareTag("Enemy"))
         {
-            // חדש: Overlay
+            soundManager.Play(SoundId.DamagePlayer);
             if (canvasController != null)
                 canvasController.StartDamageOverlay();
             isOnEnemy = true;
