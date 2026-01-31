@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour
     public void endLevel()
     {
         isLevelActive = false;
-        randomSoundGenerator.StopPlaying();
+        //randomSoundGenerator.StopPlaying();
         CalculateLevelCompletion();
     }
 
