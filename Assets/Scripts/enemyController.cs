@@ -7,15 +7,15 @@ public class enemyController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
-        fixedRotation = Quaternion.Euler(0f, transform.parent.rotation.eulerAngles.y, 0f);
+
+        fixedRotation = Quaternion.Euler(0f, 0f, 0f);
         GetComponent<Animator>().SetBool("isWalking", isWalking);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void LateUpdate()
