@@ -12,12 +12,16 @@ public class canvasController : MonoBehaviour
     [SerializeField] FloatSO maskSO;
     [SerializeField] TMP_Text text;
 
-    [Header("=== DAMAGE OVERLAY (Hit Feedback) ===")]
+    [Header("=== OVERLAYS ===")]
+    [Tooltip("Damage overlay CanvasGroup (מה שהיה canvasDMG)")]
     [SerializeField] CanvasGroup damageOverlay;
 
+    [Tooltip("Mask overlay CanvasGroup (מה שהיה canvasMask)")]
+    [SerializeField] CanvasGroup maskOverlay;
+
     [Header("=== MENU UI ===")]
-    [SerializeField] GameObject gameHUD;           // אופציונלי (POC)
-    [SerializeField] GameObject mainMenuPanel;     // אם מחובר – נשתמש בו כדי לדעת אם אנחנו בתפריט
+    [SerializeField] GameObject gameHUD;           
+    [SerializeField] GameObject mainMenuPanel;
     [SerializeField] GameObject instructionsPanel;
     [SerializeField] GameObject creditsPanel;
 
@@ -28,22 +32,12 @@ public class canvasController : MonoBehaviour
 
     void Start()
     {
-        // אם יש MainMenu מחובר – נציג אותו בהתחלה
         if (mainMenuPanel != null || instructionsPanel != null || creditsPanel != null)
             ShowMainMenu();
     }
 
     void Update()
     {
-        // ✅ POC FIX:
-        // אם אין לך GameHUD מחובר - לא עושים return.
-        // אם יש תפריט ראשי פעיל (mainMenuPanel) - לא חייבים לעדכן HUD (אבל גם לא נקרוס).
-        bool isMenuOpen = mainMenuPanel != null && mainMenuPanel.activeSelf;
-
-        // אם תרצה שלא יעדכן HUD כשהתפריט פתוח:
-        // if (isMenuOpen) return;
-
-        // עדכוני HUD עם הגנות null
         if (slider != null && health != null)
             slider.value = health.Value;
 
@@ -72,7 +66,6 @@ public class canvasController : MonoBehaviour
         if (instructionsPanel != null) instructionsPanel.SetActive(false);
         if (creditsPanel != null) creditsPanel.SetActive(false);
 
-        // אם יש לך gameHUD – נכבה. אם לא – לא נוגעים.
         if (gameHUD != null) gameHUD.SetActive(false);
     }
 
@@ -122,7 +115,26 @@ public class canvasController : MonoBehaviour
     }
 
     // =========================
-    // === DAMAGE OVERLAY ======
+    // ===== MASK OVERLAY ======
+    // =========================
+
+    public void putMaskOn()
+    {
+        if (maskOverlay == null) return;
+        maskOverlay.DOFade(1f, 0.5f);
+    }
+
+    public void putMaskOff()
+    {
+        if (maskOverlay == null) return;
+        if (maskOverlay.alpha >= 1f)
+            maskOverlay.DOFade(0f, 0.5f);
+        else
+            maskOverlay.DOFade(0f, 0.2f);
+    }
+
+    // =========================
+    // ==== DAMAGE OVERLAY =====
     // =========================
 
     public void StartDamageOverlay()
@@ -131,6 +143,7 @@ public class canvasController : MonoBehaviour
 
         damageOverlay.DOFade(0.3f, 0.1f);
 
+        damageOverlayFader?.Kill();
         damageOverlayFader = damageOverlay
             .DOFade(1f, 0.3f)
             .SetLoops(-1, LoopType.Yoyo);
@@ -143,4 +156,7 @@ public class canvasController : MonoBehaviour
         damageOverlayFader?.Kill();
         damageOverlay.DOFade(0f, 0.3f);
     }
+
+    public void dmgStart() => StartDamageOverlay();
+    public void dmgStop()  => StopDamageOverlay();
 }
