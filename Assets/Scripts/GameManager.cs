@@ -11,6 +11,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] LevelConfigSO levelConfigSO;
     [SerializeField] int currentLevelNumber = 1;
 
+    [Header("Random Sound Generator")]
+    [Tooltip("Random sound generator that plays ambient sounds during gameplay")]
+    [SerializeField] RandomSoundGenerator randomSoundGenerator;
+
     private bool isLevelActive = false;
     private float initialHealth;
 
@@ -35,6 +39,12 @@ public class GameManager : MonoBehaviour
         collectables.Value = 0;
         initialHealth = health.Value;
         isLevelActive = true;
+
+        // Start random sound generator
+        if (randomSoundGenerator != null)
+        {
+            randomSoundGenerator.StartPlaying();
+        }
     }
 
     public void startLevel(int levelNumber)
@@ -46,6 +56,13 @@ public class GameManager : MonoBehaviour
     public void endLevel()
     {
         isLevelActive = false;
+
+        // Stop random sound generator
+        if (randomSoundGenerator != null)
+        {
+            randomSoundGenerator.StopPlaying();
+        }
+
         CalculateLevelCompletion();
     }
 
@@ -103,10 +120,22 @@ public class GameManager : MonoBehaviour
     public void pauseLevel()
     {
         isLevelActive = false;
+
+        // Pause random sound generator
+        if (randomSoundGenerator != null)
+        {
+            randomSoundGenerator.StopPlaying();
+        }
     }
 
     public void resumeLevel()
     {
         isLevelActive = true;
+
+        // Resume random sound generator
+        if (randomSoundGenerator != null)
+        {
+            randomSoundGenerator.StartPlaying();
+        }
     }
 }

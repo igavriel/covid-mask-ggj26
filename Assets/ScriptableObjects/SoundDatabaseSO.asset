@@ -14,26 +14,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SoundDatabaseSO
   sounds:
   - id: 0
-    clip: {fileID: 0}
+    clip: {fileID: 8300000, guid: 70a1ee08765cc43a3944d9d9a5056edd, type: 3}
     volume: 1
-    pitchVariation: 0.8
+    pitchVariation: 1
   - id: 1
-    clip: {fileID: 0}
-    volume: 0
-    pitchVariation: 0
+    clip: {fileID: 8300000, guid: e471fff7d82d144e9bb408ed520111dc, type: 3}
+    volume: 1
+    pitchVariation: 1
   - id: 2
-    clip: {fileID: 0}
-    volume: 0
-    pitchVariation: 0
+    clip: {fileID: 8300000, guid: fcbf73584949647528c6922999e68363, type: 3}
+    volume: 1
+    pitchVariation: 1
   - id: 3
-    clip: {fileID: 0}
-    volume: 0
-    pitchVariation: 0
+    clip: {fileID: 8300000, guid: a1a995f8a38014b09ad168787998c012, type: 3}
+    volume: 1
+    pitchVariation: 1
   - id: 4
-    clip: {fileID: 0}
-    volume: 0
-    pitchVariation: 0
-  - id: 4
-    clip: {fileID: 0}
-    volume: 0
-    pitchVariation: 0
+    clip: {fileID: 8300000, guid: 8285e684f55d94c04a1b28e4c8443f67, type: 3}
+    volume: 1
+    pitchVariation: 1
+  - id: 5
+    clip: {fileID: 8300000, guid: 412896298bd164966ba9e9a49f8c164d, type: 3}
+    volume: 1
+    pitchVariation: 1
