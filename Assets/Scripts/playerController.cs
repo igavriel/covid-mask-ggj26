@@ -34,6 +34,8 @@ public class playerController : MonoBehaviour
 
     void Update()
     {
+        if (health.Value < 0)
+            Debug.Log("GameOver");
         float vertical = Input.GetAxis("Vertical");
         float horizontal = Input.GetAxis("Horizontal");
 
@@ -54,17 +56,19 @@ public class playerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        //TODO: Add collectable logic
-        // if (collision.CompareTag("Collectable"))
-        // {
-        //     Destroy(collision.gameObject);
-        //     collectables.Value++;
-        // }
+        if (collision.CompareTag("Collectable"))
+        {
+             Destroy(collision.gameObject);
+             collectables.Value++;
+        }
 
         if (collision.CompareTag("Mask"))
         {
             putMaskOn(collision);
         }
+
+        if (collision.CompareTag("FinishLine"))
+            Debug.Log("finish game");
     }
 
     private void OnTriggerStay2D(Collider2D collision)

@@ -533,8 +533,13 @@ MonoBehaviour:
   health: {fileID: 11400000, guid: f95288ba57775e246956ee840f2dc2fb, type: 2}
   maskSO: {fileID: 11400000, guid: 7e56ff96eb051614198a903fc954ce45, type: 2}
   text: {fileID: 5250064274216119242}
-  canvasDMG: {fileID: 166975055650665756}
-  canvasMask: {fileID: 7963783634299719709}
+  damageOverlay: {fileID: 166975055650665756}
+  maskOverlay: {fileID: 7963783634299719709}
+  gameHUD: {fileID: 0}
+  mainMenuPanel: {fileID: 0}
+  instructionsPanel: {fileID: 0}
+  creditsPanel: {fileID: 0}
+  pauseController: {fileID: 0}
 --- !u!1 &6010962534986242423
 GameObject:
   m_ObjectHideFlags: 0
