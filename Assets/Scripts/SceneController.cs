@@ -6,13 +6,13 @@ public class SceneController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void loadNextScene()
@@ -33,5 +33,15 @@ public class SceneController : MonoBehaviour
     public int getSceneIndex()
     {
         return SceneManager.GetActiveScene().buildIndex;
+    }
+
+    public void restartScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void backToMenu()
+    {
+        loadNextByIndex(0);
     }
 }
