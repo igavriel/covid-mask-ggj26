@@ -11,6 +11,7 @@ public class playerController : MonoBehaviour
     [SerializeField] IntSO collectables;
     [SerializeField] canvasController canvasController;
     [SerializeField] MusicManager musicManager;
+    [SerializeField] SoundManager soundManager;
 
     Animator animatorController;
 
@@ -94,12 +95,14 @@ public class playerController : MonoBehaviour
         canvasController.putMaskOn();
         Destroy(collision.gameObject);
         Debug.Log("Mask put on");
-        musicManager.ActivateSecondaryTrack(4.5f);
+        soundManager.Play(SoundId.MaskOn);
+        //musicManager.ActivateSecondaryTrack(4.5f);
     }
 
     private void removeMask()
     {
         isMaskOn = false;
+        soundManager.Play(SoundId.MaskOff);
         canvasController.putMaskOff();
         Debug.Log("Mask removed");
     }
