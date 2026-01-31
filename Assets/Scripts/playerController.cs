@@ -9,6 +9,8 @@ public class playerController : MonoBehaviour
     [SerializeField] FloatSO health;
     [SerializeField] IntSO collectables;
     [SerializeField] canvasController canvasController;
+    [SerializeField] MusicManager musicManager;
+
 
     Rigidbody2D rb2d;
     bool isMaskOn = false;
@@ -41,6 +43,7 @@ public class playerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        //TODO: Add collectable logic
         // if (collision.CompareTag("Collectable"))
         // {
         //     Destroy(collision.gameObject);
@@ -49,10 +52,7 @@ public class playerController : MonoBehaviour
 
         if (collision.CompareTag("Mask"))
         {
-            Destroy(collision.gameObject);
-            isMaskOn = true;
-            maskSO.Value = maskTimer;
-            canvasController.putMaskOn();
+            putMaskOn(collision);
         }
 
         if (collision.CompareTag("Enemy"))
@@ -69,9 +69,20 @@ public class playerController : MonoBehaviour
         }
     }
 
-    void removeMask()
+    private void putMaskOn(Collider2D collision)
+    {
+        isMaskOn = true;
+        maskSO.Value = maskTimer;
+        canvasController.putMaskOn();
+        Destroy(collision.gameObject);
+        Debug.Log("Mask put on");
+        musicManager.ActivateSecondaryTrack(4.5f);
+    }
+
+    private void removeMask()
     {
         isMaskOn = false;
         canvasController.putMaskOff();
+        Debug.Log("Mask removed");
     }
 }
