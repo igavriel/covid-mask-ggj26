@@ -3,6 +3,20 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "LevelConfigSO", menuName = "Scriptable Objects/Level Config SO")]
 public class LevelConfigSO : ScriptableObject
 {
+
+    [Header("Star Calculation Weights")]
+    [Tooltip("Weight for time score in star calculation (0-1). Weights should sum to 1.0 for best results.")]
+    [Range(0f, 1f)]
+    public float timeWeight = 0.2f;
+
+    [Tooltip("Weight for collectables score in star calculation (0-1). Weights should sum to 1.0 for best results.")]
+    [Range(0f, 1f)]
+    public float collectableWeight = 0.5f;
+
+    [Tooltip("Weight for health/damage score in star calculation (0-1). Weights should sum to 1.0 for best results.")]
+    [Range(0f, 1f)]
+    public float healthWeight = 0.3f;
+
     [Header("Level Configurations")]
     [Tooltip("Array of level configurations. Each entry defines the 3-star requirements for that level.")]
     public LevelConfig[] levels;
@@ -25,8 +39,7 @@ public class LevelConfigSO : ScriptableObject
     }
 
     /// <summary>
-    /// Calculates the star rating based on performance metrics using weighted formula:
-    /// Time = 20%, Collectables = 50%, Health = 30%
+    /// Calculates the star rating based on performance metrics using configurable weighted formula.
     /// </summary>
     /// <param name="levelNumber">The level number</param>
     /// <param name="timeTaken">Time taken in seconds</param>
@@ -92,8 +105,16 @@ public class LevelConfigSO : ScriptableObject
             healthScore = 100f; // No damage requirement and took no damage
         }
 
-        // Apply weights: Time = 20%, Collectables = 50%, Health = 30%
-        float weightedScore = (timeScore * 0.2f) + (collectableScore * 0.5f) + (healthScore * 0.3f);
+        // Normalize weights to ensure they sum to 1.0
+        float totalWeight = timeWeight + collectableWeight + healthWeight;
+        float normalizedTimeWeight = totalWeight > 0 ? timeWeight / totalWeight : 0.33f;
+        float normalizedCollectableWeight = totalWeight > 0 ? collectableWeight / totalWeight : 0.33f;
+        float normalizedHealthWeight = totalWeight > 0 ? healthWeight / totalWeight : 0.33f;
+
+        // Apply configurable weights
+        float weightedScore = (timeScore * normalizedTimeWeight) +
+                             (collectableScore * normalizedCollectableWeight) +
+                             (healthScore * normalizedHealthWeight);
 
         // Convert weighted score (0-100) to stars (0-3)
         // 0-33% = 0 stars, 34-66% = 1 star, 67-83% = 2 stars, 84-100% = 3 stars
