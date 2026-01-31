@@ -29,4 +29,9 @@ public class SceneController : MonoBehaviour
     {
         SceneManager.LoadScene(sceneName);
     }
+
+    public int getSceneIndex()
+    {
+        return SceneManager.GetActiveScene().buildIndex;
+    }
 }

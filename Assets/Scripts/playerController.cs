@@ -80,6 +80,7 @@ public class playerController : MonoBehaviour
     {
         if (collision.CompareTag("Enemy"))
         {
+            if (isMaskOn) return;
             soundManager.Play(SoundId.DamagePlayer);
             if (canvasController != null)
                 canvasController.StartDamageOverlay();

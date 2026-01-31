@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6750098479150038616}
   - component: {fileID: 2471248809983679588}
   - component: {fileID: 4242571436137732996}
+  - component: {fileID: 7299862127270519804}
   m_Layer: 0
   m_Name: FinishLine
   m_TagString: Untagged
@@ -138,3 +139,15 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &7299862127270519804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6704730488672815997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1856eac3be6fa6645871e6196185af92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SceneController
