@@ -12,9 +12,11 @@ public class playerController : MonoBehaviour
     [SerializeField] canvasController canvasController;
     [SerializeField] MusicManager musicManager;
 
+    Animator animatorController;
 
     Rigidbody2D rb2d;
     bool isMaskOn = false;
+    bool isOnEnemy = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -22,6 +24,7 @@ public class playerController : MonoBehaviour
         health.Value = 100;
         collectables.Value = 0;
         rb2d = GetComponent<Rigidbody2D>();
+        animatorController = GetComponent<Animator>();
 
         // לוודא מצב התחלה הגיוני
         isMaskOn = false;
@@ -59,12 +62,17 @@ public class playerController : MonoBehaviour
         {
             putMaskOn(collision);
         }
+    }
 
+    private void OnTriggerStay2D(Collider2D collision)
+    {
         if (collision.CompareTag("Enemy"))
         {
             // חדש: Overlay
             if (canvasController != null)
                 canvasController.StartDamageOverlay();
+            isOnEnemy = true;
+
         }
     }
 
@@ -92,5 +100,16 @@ public class playerController : MonoBehaviour
         isMaskOn = false;
         canvasController.putMaskOff();
         Debug.Log("Mask removed");
+    }
+
+    void handleAnim()
+    {
+        if (Input.GetAxis("Horizontal") > 0) GetComponent<SpriteRenderer>().flipX = false;
+        else if (Input.GetAxis("Horizontal") < 0) GetComponent<SpriteRenderer>().flipX = true;
+
+        animatorController.SetFloat("Horizontal", Input.GetAxis("Horizontal"));
+        animatorController.SetFloat("Vertical", Input.GetAxis("Vertical"));
+
+        animatorController.SetBool("isWalking", Input.GetAxis("Horizontal") + Input.GetAxis("Vertical") != 0);
     }
 }
