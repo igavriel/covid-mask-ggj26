@@ -100,7 +100,7 @@ public class playerController : MonoBehaviour
         Destroy(collision.gameObject);
         Debug.Log("Mask put on");
         soundManager.Play(SoundId.MaskOn);
-        //musicManager.ActivateSecondaryTrack(4.5f);
+        musicManager.ActivateSecondaryTrack(5.0f);
     }
 
     private void removeMask()
