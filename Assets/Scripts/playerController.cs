@@ -8,15 +8,19 @@ public class playerController : MonoBehaviour
 
     [SerializeField] FloatSO maskSO;
     [SerializeField] FloatSO health;
-
+    [SerializeField] IntSO collectables;
     [SerializeField] canvasController canvasController;
+    [SerializeField] MusicManager musicManager;
+
 
     Rigidbody2D rb2d;
     bool isMaskOn = false;
 
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        health.Value = 100f;
+        health.Value = 100;
+        collectables.Value = 0;
         rb2d = GetComponent<Rigidbody2D>();
 
         // לוודא מצב התחלה הגיוני
@@ -26,18 +30,16 @@ public class playerController : MonoBehaviour
 
     void Update()
     {
+        float vertical = Input.GetAxis("Vertical");
+        float horizontal = Input.GetAxis("Horizontal");
+
+        if (SystemInfo.operatingSystem.Contains("Mac")) vertical *= -1;
+
         rb2d.linearVelocity = new Vector2(
-            Input.GetAxis("Horizontal") * speed * Time.deltaTime,
-            Input.GetAxis("Vertical") * speed * Time.deltaTime
-        );
-
-        // נזק רק אם אין מסכה
-        if (!isMaskOn)
-            health.Value -= dmgTime * Time.deltaTime;
-
-        // טיימר מסכה יורד רק כשהמסכה פעילה
-        if (isMaskOn)
-        {
+            horizontal * speed * Time.deltaTime,
+            vertical * speed * Time.deltaTime);
+        if (!isMaskOn) health.Value -= dmgTime * Time.deltaTime;
+        if (maskSO.Value >= 0)
             maskSO.Value -= Time.deltaTime;
 
             if (maskSO.Value <= 0f)
@@ -47,11 +49,16 @@ public class playerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        //TODO: Add collectable logic
+        // if (collision.CompareTag("Collectable"))
+        // {
+        //     Destroy(collision.gameObject);
+        //     collectables.Value++;
+        // }
+
         if (collision.CompareTag("Mask"))
         {
-            Destroy(collision.gameObject);
-            isMaskOn = true;
-            maskSO.Value = maskTimer;
+            putMaskOn(collision);
         }
 
         if (collision.CompareTag("Enemy"))
@@ -66,15 +73,25 @@ public class playerController : MonoBehaviour
     {
         if (collision.CompareTag("Enemy"))
         {
-            // חדש: Overlay
             if (canvasController != null)
                 canvasController.StopDamageOverlay();
         }
     }
 
-    void removeMask()
+    private void putMaskOn(Collider2D collision)
+    {
+        isMaskOn = true;
+        maskSO.Value = maskTimer;
+        canvasController.putMaskOn();
+        Destroy(collision.gameObject);
+        Debug.Log("Mask put on");
+        musicManager.ActivateSecondaryTrack(4.5f);
+    }
+
+    private void removeMask()
     {
         isMaskOn = false;
-        maskSO.Value = 0f;
+        canvasController.putMaskOff();
+        Debug.Log("Mask removed");
     }
 }
