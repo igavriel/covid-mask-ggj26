@@ -19,6 +19,7 @@ public class playerController : MonoBehaviour
     Rigidbody2D rb2d;
     bool isMaskOn = false;
     bool isOnEnemy = false;
+    bool isDamagePlayed = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -80,8 +81,14 @@ public class playerController : MonoBehaviour
     {
         if (collision.CompareTag("Enemy"))
         {
-            if (isMaskOn) return;
-            soundManager.Play(SoundId.DamagePlayer);
+            if (isMaskOn)
+                return;
+            if (!isDamagePlayed)
+            {
+                soundManager.Play(SoundId.DamagePlayer);
+                isDamagePlayed = true;
+            }
+
             if (canvasController != null)
                 canvasController.StartDamageOverlay();
             isOnEnemy = true;
@@ -93,6 +100,7 @@ public class playerController : MonoBehaviour
     {
         if (collision.CompareTag("Enemy"))
         {
+            isDamagePlayed = false;
             if (canvasController != null)
                 canvasController.StopDamageOverlay();
         }

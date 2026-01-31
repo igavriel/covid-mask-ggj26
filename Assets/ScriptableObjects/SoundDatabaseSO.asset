@@ -23,7 +23,7 @@ MonoBehaviour:
     pitchVariation: 1
   - id: 2
     clip: {fileID: 8300000, guid: fcbf73584949647528c6922999e68363, type: 3}
-    volume: 1
+    volume: 0.705
     pitchVariation: 1
   - id: 3
     clip: {fileID: 8300000, guid: a1a995f8a38014b09ad168787998c012, type: 3}
