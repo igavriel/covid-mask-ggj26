@@ -31,10 +31,16 @@ public class canvasController : MonoBehaviour
             text.text = MathF.Ceiling(maskSO.Value).ToString();
         else
             text.text = "";
+    }
 
-        if (maskSO.Value == 5)
-            canvasMask.DOFade(1, 0.5f);
-        else if (maskSO.Value <= 0)
+    public void putMaskOn()
+    {
+        canvasMask.DOFade(1, 0.5f);
+    }
+
+    public void putMaskOff()
+    {
+        if (canvasMask.alpha == 1)
             canvasMask.DOFade(0, 0.5f);
     }
 

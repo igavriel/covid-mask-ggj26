@@ -24,6 +24,10 @@ public class playerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        float horizontal = Input.GetAxis("Horizontal");
+
+        if (SystemInfo.operatingSystem.Contains("Mac")) horizontal *= -1;
+
         rb2d.linearVelocity = new Vector2(Input.GetAxis("Horizontal") * speed * Time.deltaTime, Input.GetAxis("Vertical") * speed * Time.deltaTime);
         if (!isMaskOn) health.Value -= dmgTime * Time.deltaTime;
         if (maskSO.Value >= 0)
@@ -45,7 +49,7 @@ public class playerController : MonoBehaviour
             Destroy(collision.gameObject);
             isMaskOn = true;
             maskSO.Value = maskTimer;
-
+            canvasController.putMaskOn();
         }
 
         if (collision.CompareTag("Enemy"))
@@ -65,5 +69,6 @@ public class playerController : MonoBehaviour
     void removeMask()
     {
         isMaskOn = false;
+        canvasController.putMaskOff();
     }
 }
