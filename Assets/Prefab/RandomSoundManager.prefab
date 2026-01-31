@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8586543810533889706}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -45,9 +45,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RandomSoundGenerator
   audioClips:
-  - {fileID: 8300000, guid: 5085f6746da2245858721f021d6e3c08, type: 3}
-  - {fileID: 8300000, guid: a897bbb354ccc4efd87c5534f98da526, type: 3}
+  - {fileID: 8300000, guid: 3611dd0e07acb47c4a4a9cb9c2a87639, type: 3}
+  - {fileID: 8300000, guid: 12cad7b9e2eed4e118cb5e9d5cb6baf6, type: 3}
+  - {fileID: 8300000, guid: 65cedc769bf454bc88b5039f31bb51fd, type: 3}
+  - {fileID: 8300000, guid: fa43bf6789b484c33b8a1cd2c9a98580, type: 3}
+  - {fileID: 8300000, guid: 1deee57e202104a9e99e68bff5c935b5, type: 3}
+  - {fileID: 8300000, guid: 1ead29e6d633841b7a08e5dd3ecc411c, type: 3}
+  - {fileID: 8300000, guid: 3e154e892cff2459cb4f9e9a77e73398, type: 3}
+  - {fileID: 8300000, guid: 57222a1b1bfc44cbfba9de3eb0d9793b, type: 3}
   audioSource: {fileID: 0}
-  minInterval: 2
-  maxInterval: 5
+  minIntervalSeconds: 2
+  maxIntervalSeconds: 5
   volume: 1

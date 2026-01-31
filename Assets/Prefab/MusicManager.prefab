@@ -48,8 +48,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MusicManager
   mainTrack: {fileID: 7371382008492990312}
   secondaryTrack: {fileID: 6621180343308348944}
-  fadeInDuration: 0.2
-  fadeOutDuration: 0.2
+  fadeInDuration: 1
+  fadeOutDuration: 1.5
   secondaryTrackVolume: 1
 --- !u!82 &7371382008492990312
 AudioSource:
@@ -159,7 +159,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
+  m_Resource: {fileID: 8300000, guid: a897bbb354ccc4efd87c5534f98da526, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
