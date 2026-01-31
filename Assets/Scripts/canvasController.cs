@@ -8,6 +8,7 @@ public class canvasController : MonoBehaviour
 {
     [Header("=== GAME HUD ===")]
     [SerializeField] Slider slider;
+    [SerializeField] Slider Shield;
     [SerializeField] FloatSO health;
     [SerializeField] FloatSO maskSO;
     [SerializeField] TMP_Text text;
@@ -48,6 +49,10 @@ public class canvasController : MonoBehaviour
             else
                 text.text = "";
         }
+
+        Shield.value = maskSO.Value;
+
+
     }
 
     // =========================
